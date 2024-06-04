@@ -1,3 +1,5 @@
+// start with code from 01_FormInputValidationHtmlOnly.jsx
+
 import { useEffect, useState } from "react";
 export default function FormInputValidationNoStyling() {
   // TODO: create state variables for email, password, hidePassword, emailError, passwordError
@@ -12,28 +14,10 @@ export default function FormInputValidationNoStyling() {
   // TODO: ensure the button is correctly set up in the the form element
   useEffect(() => {
     const validateEmail = () => {
-      if (email === "") {
-        setEmailError("");
-
-        return;
-      }
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        setEmailError("Invalid email address");
-      } else {
-        setEmailError("");
-      }
+      // code here:
     };
     const validatePassword = () => {
-      if (password === "") {
-        setPasswordError("");
-      } else if (password.length < 6) {
-        setPasswordError(
-          "Invalid password, must be at least 6 characters long"
-        );
-      } else {
-        setPasswordError("");
-      }
+      // code here:
     };
 
     validateEmail();
@@ -42,26 +26,12 @@ export default function FormInputValidationNoStyling() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (!emailError && !passwordError) {
-      const newEntry = { email, password };
-      setSubmittedData([...submittedData, newEntry]);
-      alert(
-        `Form submitted successfully! Your email ${email} has been submitted.`
-      );
-    } else if (emailError && passwordError) {
-      alert("Please fix the email address and password errors in the form.");
-    } else if (emailError) {
-      alert("Please fix the email address error in the form.");
-    } else if (passwordError) {
-      alert("Please fix the password error in the form.");
-    } else {
-      console.log("Unknown error, please refresh your browser");
-    }
+    // code here:
   }
 
   function handleHidePassword(e) {
     e.preventDefault();
-    setHidePassword(!hidePassword);
+    // code here:
   }
 
   return (
