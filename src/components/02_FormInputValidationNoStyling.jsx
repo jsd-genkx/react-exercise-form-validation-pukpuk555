@@ -15,9 +15,28 @@ export default function FormInputValidationNoStyling() {
   useEffect(() => {
     const validateEmail = () => {
       // code here:
+      if (email === "") {
+        setEmailError("");
+        return;
+      }
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        setEmailError("Invalid email address");
+      } else {
+        setEmailError("");
+      }
     };
     const validatePassword = () => {
       // code here:
+      if (password === "") {
+        setPasswordError("");
+      } else if (password.length < 6) {
+        setPasswordError(
+          "Invalid password, must be at least 6 characters long"
+        );
+      } else {
+        setPasswordError("");
+      }
     };
 
     validateEmail();
@@ -27,11 +46,25 @@ export default function FormInputValidationNoStyling() {
   function handleSubmit(e) {
     e.preventDefault();
     // code here:
+    if (!emailError && !passwordError) {
+      const newEntry = { email, password };
+      setSubmittedData([...submittedData, newEntry]);
+      alert(`Successfully! ${email} has been submitted`);
+    } else if (emailError && passwordError) {
+      alert("Invalid Email and Password");
+    } else if (emailError) {
+      alert("Invalid Email");
+    } else if (passwordError) {
+      alert("Invalid Password");
+    } else {
+      alert("Unknow Error");
+    }
   }
 
   function handleHidePassword(e) {
     e.preventDefault();
     // code here:
+    setHidePassword(!hidePassword);
   }
 
   return (
@@ -54,12 +87,12 @@ export default function FormInputValidationNoStyling() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          {passwordError && password !== "" && <p>{passwordError}</p>}
           <div className="flex items-center mt-2">
             <button onClick={handleHidePassword}>
               {hidePassword ? "Show Password" : "Hide Password"}
             </button>
           </div>
-          {passwordError && password !== "" && <p>{passwordError}</p>}
         </div>
         <div>
           <button type="submit">Submit</button>
